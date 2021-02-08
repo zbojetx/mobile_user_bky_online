@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Text, View, TouchableOpacity, StyleSheet, Image, ScrollView, StatusBar } from 'react-native';
+import { Text, View, TouchableOpacity, StyleSheet, Image, ScrollView, BackHandler, StatusBar, Alert } from 'react-native';
 import HeaderImageScrollView, { TriggeringView } from 'react-native-image-header-scroll-view';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Animated from 'react-native-reanimated';
@@ -50,7 +50,7 @@ const buttonItem = [
         id:6,
         title: 'Ikuti Kami',
         icon: 'ios-logo-facebook',
-        route: 'Pengaduan',
+        route: 'Sosmed',
         color: '#4b7bec'
     },
 
@@ -69,7 +69,27 @@ const MainScreen = ({ navigation, route }) => {
 
     useEffect(() => {
         firstRun()
+        const backHandler = BackHandler.addEventListener(
+            "hardwareBackPress",
+            backAction
+        );
+
+        return () => backHandler.remove();
     }, [])
+
+    const backAction = () => {
+        if (navigation.isFocused()) {
+            Alert.alert("Keluar", "Keluar Aplikasi?", [
+                {
+                    text: "Cancel",
+                    onPress: () => null,
+                    style: "cancel"
+                },
+                { text: "YES", onPress: () => BackHandler.exitApp() }
+            ]);
+            return true;
+        }
+    };
 
     const firstRun = async () => {
         getAllBanner()
@@ -211,7 +231,6 @@ const MainScreen = ({ navigation, route }) => {
                 )}
 
             </RBSheet>
-      
             
 
         </Animated.ScrollView>

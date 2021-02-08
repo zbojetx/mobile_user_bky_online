@@ -34,7 +34,6 @@ const BeritaDetail = ({ navigation, route }) => {
 
         setListArtikel(data.data.datas.artikel[0])
         setArtikelPath(data.data.datas.host)
-
     }
 
 

@@ -29,6 +29,7 @@ import {
     UIActivityIndicator,
     WaveIndicator,
 } from 'react-native-indicators';
+import HTML from 'react-native-render-html';
 import moment from 'moment';
 moment.locale('id')
 
@@ -184,7 +185,7 @@ function Pra({ navigation }) {
                                     {item.jawaban === '' ? (
                                         <Text style={{ fontSize: 12 }}>Belum ada jawaban</Text>
                                     ):(
-                                        <Text>{item.jawaban}</Text>
+                                        <HTML html={item.jawaban} />
                                     )}
                                     </View>
                                 </View>

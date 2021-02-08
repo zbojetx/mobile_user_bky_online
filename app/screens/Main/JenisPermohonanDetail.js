@@ -16,21 +16,30 @@ import HTML from 'react-native-render-html';
 import { MIN_HEIGHT, IMAGE_H } from '../setting/constans';
 
 
-const BeritaDetail = ({ navigation, route }) => {
-    const [artikelId, setArtikelId] = useState()
-    const [artikel, setListArtikel] = useState([])
-    const [artikelpath, setArtikelPath] = useState('')
+const JenisPermohonanDetail = ({ navigation, route }) => {
+    const [jenisPermohonanId, setJenisPermohonanId] = useState(route.params.jenisPermohonanId)
+    const [jenisPermohonan, setJenisPermohonan] = useState([])
+
+    useEffect(() => {
+            getjenisPermohonanId(jenisPermohonanId)
+    }, [])
+
+    const getjenisPermohonanId= async (id) => {
+        let url = '/getjenispermohonanbyid'
+        const data = await get_all_by_id(url, id)
+
+        setJenisPermohonan(data.data.datas[0])
+    }
 
 
     return (
         <ScrollView>
             <View style={{ padding: 20 }}>
-                <Text style={{ fontSize: 24, fontWeight: 'bold', flexWrap: 'wrap' }}>Permohonan Pemecahan Bidang</Text>
+                <Text style={{ fontSize: 24, fontWeight: 'bold', flexWrap: 'wrap' }}>{jenisPermohonan.nama_permohonan}</Text>
             </View>
             <View style={{ padding: 20 }}>
-                <Text>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum</Text>
+                <Text> <HTML html={jenisPermohonan.syarat_permohonan} /> </Text>
             </View>
-
         </ScrollView>
     )
 }
@@ -41,4 +50,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default BeritaDetail;
+export default JenisPermohonanDetail;

@@ -7,41 +7,41 @@ import {
     TouchableOpacity,
     Image,
     ScrollView,
-    StatusBar
+    StatusBar,
+    Linking
 } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { get_all } from './../../api/api';
 
 const JenisPermohonanList = ({ navigation }) => {
-    const [jenispermohonanlist, setlistJenisPermohonan] = useState([])
+    const [sosmedAll, setSosmedAll] = useState([])
 
     useEffect(() => {
         jenisPermohonan()
     }, [])
 
     const jenisPermohonan = async () => {
-        let url = '/getjenispermohonan'
+        let url = '/getsosmed'
         const data = await get_all(url)
         console.log(data)
-        setlistJenisPermohonan(data.datas)
-        console.log(data.datas)
+        setSosmedAll(data.datas)
     }
 
     return (
         <ScrollView style={{ backgroundColor: 'white' }}>
-            <StatusBar backgroundColor='#30336b' barStyle='light-content' />
+            <StatusBar backgroundColor='#4b7bec' barStyle='light-content' />
             <View style={[styles.listContainer]}>
-                {jenispermohonanlist.map((item, index) =>
-                    <TouchableOpacity style={[styleBerita.list]} onPress={() => navigation.navigate('Permohonandetail', { jenisPermohonanId: item.id_jenis_permohonan })} key={index}>
-                    <View style={{ width: '15%', justifyContent: 'center', alignItems: 'flex-start' }}>
-                        <View style={{ backgroundColor: '#192a56', aspectRatio: 1, padding: 10, borderRadius: 50, justifyContent: 'center', alignItems: 'center' }}>
-                            <Text style={{ color: 'white', fontWeight: 'bold' }}>{index + 1}</Text>
+                {sosmedAll.map((item, index) =>
+                    <TouchableOpacity style={[styleBerita.list]} key={index} onClick={() => Linking.openURL(`${item.url}`)}>
+                        <View style={{ width: '15%', justifyContent: 'center', alignItems: 'flex-start' }}>
+                            <View style={{ padding: 10, justifyContent: 'center', alignItems: 'center' }}>
+                                <Image source={{uri: `${item.logo_url}` }} style={{ width: 40, aspectRatio: 1 }}  />
+                            </View>
                         </View>
-                    </View>
-                    <View style={{ width: '85%', justifyContent: 'center', alignItems: 'flex-start' }}>
-                        <Text style={{ flexWrap: 'wrap', color: 'black', fontWeight: 'bold', flexWrap: 'wrap', marginTop: 5, fontSize: 14, }}>{item.nama_permohonan}</Text>
-                    </View>
-                </TouchableOpacity>
+                        <View style={{ width: '85%', justifyContent: 'center', alignItems: 'flex-start' }}>
+                            <Text style={{ flexWrap: 'wrap', color: 'black', fontWeight: 'bold', flexWrap: 'wrap', marginTop: 5, fontSize: 18, marginLeft: 10 }}>{item.akun}</Text>
+                        </View>
+                    </TouchableOpacity>
                 )}
             </View>
         </ScrollView>
@@ -121,3 +121,6 @@ const styleBerita = StyleSheet.create({
 })
 
 export default JenisPermohonanList;
+
+
+//onPress={() => navigation.navigate('Permohonandetail', { jenisPermohonanId: item.id_jenis_permohonan })}

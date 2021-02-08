@@ -42,12 +42,13 @@ import ListPermohonan from './app/screens/Main/JenispermohonanList';
 import BeritaDetail from './app/screens/Main/BeritaDetail';
 import Auth from './app/screens/Auth/Auth';
 import Tracking from './app/screens/Main/Tracking';
-import JenisPelayananDetail from './app/screens/Main/JenisPermohonanDetail'
-import Tes from './app/screens/Main/Tes'
+import JenisPelayananDetail from './app/screens/Main/JenisPermohonanDetail';
+import Sosmed from './app/screens/Main/Sosmed';
+import Tes from './app/screens/Main/Tes';
 
 import Pra from './app/screens/Tab/Pra';
 import Qna from './app/screens/Tab/qna';
-import Profil from './app/screens/Tab/Profil'
+import Profil from './app/screens/Tab/Profil';
 
 
 
@@ -262,13 +263,26 @@ function App(props) {
             },
           })}
         />
-         <Stack.Screen
+        <Stack.Screen
           name="Permohonandetail"
           component={JenisPelayananDetail}
           options={({ route }) => ({
             title: 'Syarat Permohonan',
             headerStyle: {
               backgroundColor: '#30336b',
+            },
+            headerTintColor: '#fff',
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          })}
+        />
+        <Stack.Screen
+          name="Sosmed"
+          component={Sosmed}
+          options={({ route }) => ({
+            headerStyle: {
+              backgroundColor: '#4b7bec',
             },
             headerTintColor: '#fff',
             headerTitleStyle: {
