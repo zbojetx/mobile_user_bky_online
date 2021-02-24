@@ -19,6 +19,7 @@ import {
 //import Video from 'react-native-video';
 import ResponsiveScreen from 'react-native-auto-responsive-screen'
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const screenWidth = Math.round(Dimensions.get('window').width);
 const screenHeight = Math.round(Dimensions.get('window').height);
@@ -46,6 +47,7 @@ export default class StartScreen extends Component {
             pfxPos: new Animated.Value(pfxPosStrt),
         }
     }
+
 
     fadeIn = (fadeTime, fadeVar, nextAnim) => {
         Animated.timing(fadeVar, {
@@ -88,16 +90,16 @@ export default class StartScreen extends Component {
                     setTimeout(() => {
                         this.fadeOut(3000, this.state.fadeScreen);
                         this.fadeOut(3000, this.state.fadeAnim, () => {
-                            // let apikey = appSettings.get('apikey');
-                            // if (apikey !== '' && apikey !== 'undefined') { //uncomment this line fo activate login page
-                            //     this.props.navigation.navigate("MainScreen");
-                            //     return;
-                            // } else {
-                            //     this.props.navigation.navigate("VideoScreen"); // Real one
-                            //     //this.props.navigation.navigate("Route");
-                            //     return;
-                            // }
-                            this.props.navigation.navigate("Auth");
+                            let isLogin = AsyncStorage.getItem('login')
+                            if (isLogin) { //uncomment this line fo activate login page
+                                this.props.navigation.navigate("Route");
+                                return;
+                            } else {
+                                this.props.navigation.navigate("Auth"); // Real one
+                                //this.props.navigation.navigate("Route");
+                                return;
+                            }
+                            
                         });
                     }, 1500)
                 }

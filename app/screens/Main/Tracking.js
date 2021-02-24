@@ -28,14 +28,36 @@ function Tracking({ navigation }) {
 
     const getTracking = async () => {
         let url = '/gettrackingbyid'
-        if(idberkas === ''){
-            alert("Id Berkas tidak boleh kosong")
-        }else{
+        if (idberkas === '') {
+            Toast.show({
+                type: 'error',
+                position: 'top',
+                text1: 'Validasi',
+                text2: 'Kode berkas tidak boleh kosong',
+                visibilityTime: 4000,
+                autoHide: true,
+                topOffset: 30,
+                bottomOffset: 40,
+            });
+        } else {
             const data = await get_all_by_id(url, idberkas)
-            setTrackingList(data.data.datas)
+            if(data.data.datas.length === 0){
+                Toast.show({
+                    type: 'error',
+                    position: 'top',
+                    text1: 'Validasi',
+                    text2: 'Berkas tidak ditemukan',
+                    visibilityTime: 4000,
+                    autoHide: true,
+                    topOffset: 30,
+                    bottomOffset: 40,
+                });
+            }else{
+                setTrackingList(data.data.datas)
+            }
         }
-    
-       
+
+
     }
 
     const onSuccess = async (e) => {
@@ -72,7 +94,7 @@ function Tracking({ navigation }) {
                         onRead={onSuccess}
                         topContent={
                             < View style={{
-                                 width: '100%', backgroundColor: '#ff4757', marginTop: -10, justifyContent: 'center', alignItems: 'center'
+                                width: '100%', backgroundColor: '#ff4757', marginTop: -10, justifyContent: 'center', alignItems: 'center'
                             }}>
 
                             </View >

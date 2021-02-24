@@ -1,7 +1,7 @@
 import axios from 'axios'
 
-const endpoint = 'http://192.168.100.96:6789'
-//const endpoint = 'https://api-bky.dinartech.com'
+//const endpoint = 'http://192.168.100.96:6789'
+const endpoint = 'https://api-bky.dinartech.com'
 
 
 export const get_all = async(url) => {

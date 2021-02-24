@@ -13,21 +13,13 @@ import { FAB, Modal, Portal, Provider, Appbar } from 'react-native-paper';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import DocumentPicker from 'react-native-document-picker';
 import { Picker } from '@react-native-community/picker';
-import { get_all, uploadsinglefile, get_all_by_id, get_all_post  } from './../../api/api';
+import { get_all, uploadsinglefile, get_all_by_id, get_all_post } from './../../api/api';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
 import Toast from 'react-native-toast-message';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import RBSheet from "react-native-raw-bottom-sheet";
 import {
-    BallIndicator,
-    BarIndicator,
     DotIndicator,
-    MaterialIndicator,
-    PacmanIndicator,
-    PulseIndicator,
-    SkypeIndicator,
-    UIActivityIndicator,
-    WaveIndicator,
 } from 'react-native-indicators';
 import HTML from 'react-native-render-html';
 import moment from 'moment';
@@ -43,7 +35,7 @@ function Pra({ navigation }) {
     const [jenispermohonanx, setJenisPermohonan] = useState('')
     const [qna, setQna] = useState([])
 
-    const [judul, setJudul] = useState('') 
+    const [judul, setJudul] = useState('')
     const [pertanyaan, setPertanyaan] = useState('')
     const [datuser, setDataUser] = useState([])
 
@@ -52,19 +44,19 @@ function Pra({ navigation }) {
     const refRBSheet = useRef();
 
     useEffect(() => {
-      getData()
-      getqna()
+        getData()
+        getqna()
     }, [])
-    
+
     const getData = async () => {
         const datas = await AsyncStorage.getItem('userData')
-        if (datas != null){
+        if (datas != null) {
             setDataUser(JSON.parse(datas))
         }
     }
 
-    const getqna= async () => {
-       
+    const getqna = async () => {
+
         let url = '/getqna'
         const data = await get_all(url)
         console.log("datas")
@@ -83,11 +75,11 @@ function Pra({ navigation }) {
         let url = 'createqna'
         const create = await uploadsinglefile(datas, url)
 
-        if(create === 1){
+        if (create === 1) {
             setIsLoading(false)
             getqna()
             resetForm()
-        }else{
+        } else {
             setIsLoading(false)
         }
     }
@@ -102,7 +94,7 @@ function Pra({ navigation }) {
     const showModal = () => setVisible(true);
     const hideModal = () => setVisible(false);
 
-  
+
     const resetForm = () => {
         setJudul('')
         setPertanyaan('')
@@ -134,21 +126,21 @@ function Pra({ navigation }) {
                         <TextInput
                             placeholder="Judul"
                             style={[styles.textInputStyle, { marginTop: 30, height: 50 }]}
-                            onChangeText = {(text) => setJudul(text)}
+                            onChangeText={(text) => setJudul(text)}
                         />
                         <TextInput
                             multiline={true}
                             numberOfLines={6}
                             placeholder="Tulis pertanyaan anda"
                             style={[styles.textInputStyle, { marginTop: 10, textAlignVertical: 'top' }]}
-                            onChangeText = {(text) => setPertanyaan(text)}
+                            onChangeText={(text) => setPertanyaan(text)}
                         />
-                        <TouchableOpacity  onPress={createpertanyaan} style={[styles.buttonStyle, { marginTop: 10, height: 50 }]}>
-                        {isLoading ? (
-                            <DotIndicator color='white' size={6} />
-                        ) : (
-                                <Text style={{ fontWeight: 'bold', color: 'white' }}>Buat Pertanyaan</Text>
-                            )}
+                        <TouchableOpacity onPress={createpertanyaan} style={[styles.buttonStyle, { marginTop: 10, height: 50 }]}>
+                            {isLoading ? (
+                                <DotIndicator color='white' size={6} />
+                            ) : (
+                                    <Text style={{ fontWeight: 'bold', color: 'white' }}>Buat Pertanyaan</Text>
+                                )}
                         </TouchableOpacity>
 
                     </Modal>
@@ -182,11 +174,11 @@ function Pra({ navigation }) {
                                         <Text style={{ fontSize: 12, }}>{item.pertanyaan}</Text>
                                     </View>
                                     <View style={{ padding: 5 }}>
-                                    {item.jawaban === '' ? (
-                                        <Text style={{ fontSize: 12 }}>Belum ada jawaban</Text>
-                                    ):(
-                                        <HTML html={item.jawaban} />
-                                    )}
+                                        {item.jawaban === '' ? (
+                                            <Text style={{ fontSize: 12 }}>Belum ada jawaban</Text>
+                                        ) : (
+                                                <HTML html={item.jawaban} />
+                                            )}
                                     </View>
                                 </View>
                             )}
@@ -268,7 +260,7 @@ const styles = StyleSheet.create({
     buttonStyle: {
         width: '100%',
         backgroundColor: "#54a0ff",
-        padding:10,
+        padding: 10,
         borderRadius: 8,
     },
     textInputStyle: {
