@@ -116,9 +116,8 @@ export default class StartScreen extends Component {
 
         return (
             <View style={[styles.wrapper]}>
-                <Animated.Image style={[{ resizeMode: 'contain', width: 200, height: 200, opacity: this.state.fadeAnim }]} source={require("./../../assets/img/logo.png")} />
+                <Animated.Image style={[{ resizeMode: 'contain', width: 300, height: 300, opacity: this.state.fadeAnim }]} source={require("./../../assets/img/logo.png")} />
             </View>
-
         );
     }
 

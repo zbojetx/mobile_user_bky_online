@@ -11,9 +11,10 @@ import {
 import { ScrollView } from 'react-native-gesture-handler'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FAB, Modal, Portal, Provider, Appbar } from 'react-native-paper';
+import { NavigationRouteContext } from '@react-navigation/native';
 
 
-function Profil() {
+function Profil({ navigation, route }) {
 
     const [datuser, setDataUser] = useState([])
 
@@ -26,6 +27,11 @@ function Profil() {
         if (datas != null) {
             setDataUser(JSON.parse(datas))
         }
+    }
+
+    const Logout = () => {
+        const logout =AsyncStorage.setItem('login', 'false')
+        navigation.navigate('StartScreen')
     }
 
 
@@ -65,7 +71,7 @@ function Profil() {
                 <TouchableOpacity style={[styles.buttonStyle, { marginTop: 10, backgroundColor: '#0974cc', }]}>
                     <Text style={{ fontWeight: 'bold', color: 'white' }}>Perbaharui Data</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.buttonStyle, { marginTop: 10, backgroundColor: '#e74c3c', }]}>
+                <TouchableOpacity style={[styles.buttonStyle, { marginTop: 10, backgroundColor: '#e74c3c', }]} onPress={() => Logout()}>
                     <Text style={{ fontWeight: 'bold', color: 'white' }}>Keluar</Text>
                 </TouchableOpacity>
             </ScrollView>
