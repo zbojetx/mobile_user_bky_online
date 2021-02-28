@@ -63,7 +63,6 @@ function Login({ navigation }) {
     const [no_hp, setNoHp] = useState('')
     const [akses, setAkses] = useState('')
     const [isLoading, setIsLoading] = useState(false)
-   
 
     const Validation = async () => {
         let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -159,7 +158,7 @@ function Login({ navigation }) {
         if (login.status === 1) {
             const jsonValue = JSON.stringify(login.datas.data[0])
             console.log(jsonValue)
-            let setlogin = await AsyncStorage.setItem('login', true)
+            let setlogin = await AsyncStorage.setItem('login', 'true')
             let userdata = await AsyncStorage.setItem('userData', jsonValue)
             setIsLoading(false)
             Toast.show({

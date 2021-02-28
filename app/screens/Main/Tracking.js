@@ -14,6 +14,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import { ScrollView } from 'react-native-gesture-handler';
 import QRCodeScanner from 'react-native-qrcode-scanner';
 import { RNCamera } from 'react-native-camera';
+import Toast from 'react-native-toast-message';
 import moment from 'moment';
 import "moment/min/locales";
 moment.locale('id')
@@ -72,7 +73,7 @@ function Tracking({ navigation }) {
     return (
         <View style={{ height: '100%' }}>
             <StatusBar backgroundColor='#ff4757' barStyle='light-content' />
-
+            <Toast ref={(toastRef) => Toast.setRef(toastRef)} />
             <View style={[styles.TrackingArea]}>
                 <View style={{ flexDirection: 'row' }}>
                     <TextInput

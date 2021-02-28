@@ -81,7 +81,12 @@ export default class StartScreen extends Component {
     componentDidMount() {
         // verify appSettings
         console.log('width: ' + screenWidth + ', height: ' + screenHeight)
+        this._getVal()
+    }
 
+    _getVal = async () => {   
+        const isLogin = await AsyncStorage.getItem('login');
+       // alert(A)
         this.fadeIn(
             2500,
             this.state.fadeAnim,
@@ -90,8 +95,7 @@ export default class StartScreen extends Component {
                     setTimeout(() => {
                         this.fadeOut(3000, this.state.fadeScreen);
                         this.fadeOut(3000, this.state.fadeAnim, () => {
-                            let isLogin = AsyncStorage.getItem('login')
-                            if (isLogin) { //uncomment this line fo activate login page
+                            if (isLogin === 'true') { //uncomment this line fo activate login page
                                 this.props.navigation.navigate("Route");
                                 return;
                             } else {
